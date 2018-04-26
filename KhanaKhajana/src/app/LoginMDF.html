@@ -1,0 +1,36 @@
+<div *ngIf="errorMessage.length!=0">
+    <p *ngFor = "let error of errorMessage" class = "alert alert-danger">{{error}}</p>
+</div>>
+<div class="container">
+    <h2>Login</h2>
+    <form [formGroup]="userForm"> <!-- Binding form with Model -->
+        <div class="form-group">
+            <label>User Name: </label>
+            <input type="text" class="form-control" formControlName="uName"> <!-- Binding control with tag -->
+            <div *ngIf="userForm.controls['uName'].hasError('required')" class="alert alert-danger">
+                Please enter userName
+            </div>
+            <div *ngIf="userForm.controls['uName'].hasError('minlength')" class="alert alert-danger">
+               Please enter minimum 5 characters
+            </div>
+            <div *ngIf="userForm.controls['uName'].hasError('maxlength')" class="alert alert-danger">
+                User Name can not exceed 10 characters
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Password: </label>
+            <input type="password" class="form-control" formControlName="password">
+        </div>
+        <div class="form-group">
+            <label>Role: </label>           
+             <select class="form-control" formControlName="role" [value]="role">  
+                <option *ngFor="let roleName of roleList">  {{roleName}} </option>                             
+            </select>
+        </div>
+        <div class="pull-right">
+            <button type="submit" [disabled]="!userForm.valid" (click)="checkCredentials()" class="btn btn-primary">Login</button>
+            <button class="btn btn-primary" (click)="resetForm()">Reset</button>        
+       </div>
+    </form>    
+</div>
