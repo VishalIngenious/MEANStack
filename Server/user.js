@@ -3,6 +3,7 @@ var connectionFactory = require('./connectionFactory');
 
 var router = express.Router();
 
+/* http://localhost:9090/user*/
 router.post("/user",function(request,response){
 var createConnection = connectionFactory.createConnection();
     var userData = request.body;
